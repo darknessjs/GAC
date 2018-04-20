@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+</head>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<body>
+    请输入待查询的ID以及名字
+
+<input type="text" id="id">
+<input type="text" id="name">
+<button id="submit">确定</button>
+    <div id="result">
+
+    </div>
+<script language="JavaScript">
+    var matchApi = "/sc2/profile/:id/1/:name/matches";
+    function buildApi(api, args) {
+      var replaceKeys = Object.keys(args);
+      for(var i=0;i<replaceKeys.length;i++){
+        var replaceKey = replaceKeys[i];
+        var replaceKeyWithPoint = ":"+replaceKey;
+        if (matchApi.indexOf(replaceKeyWithPoint) > -1) {
+          matchApi.replace(replaceKeyWithPoint,args[replaceKey]);
+        }
+      }
+      return matchApi;
+    }
+    $("#submit").click(function(){
+      $.get("http://127.0.0.1:9001" + buildApi(matchApi, {
+        id: $("#id").val(),
+        name: $("#name").val()
+      }),function(data){
+        $("#result").html(data);
+      })
+    })
+</script>
+</body>
+</html>
