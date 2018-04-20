@@ -25,7 +25,11 @@ func main() {
 
 func getApiData(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("path", r.URL.Path)
-	sendGetRes(r.URL.Path, w)
+	if (r.URL.Path == "/favicon.ico") {
+		fmt.Fprintf(w, "Hello astaxie!")
+	} else {
+		sendGetRes(r.URL.Path, w)
+	}
 	//fmt.Fprintf(w, "Hello astaxie!") //这个写入到w的是输出到客户端的
 }
 
@@ -47,6 +51,9 @@ func sendGetRes(api string, w http.ResponseWriter) {
 		fmt.Println(bodystr)
 		fmt.Fprintf(w, bodystr) //这个写入到w的是输出到客户端的
 	} else {
+		fmt.Println("抛出异常")
+		w.WriteHeader(response.StatusCode);
+		fmt.Fprintf(w, "2333");
 		//fmt.Fprintf(w, "error") //这个写入到w的是输出到客户端的
 	}
 }
