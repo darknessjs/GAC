@@ -27,7 +27,7 @@
       return matchApi;
     }
     $("#submit").click(function(){
-      $.get("http://127.0.0.1:9001" + buildApi(matchApi, {
+      $.get("/action/" + buildApi(matchApi, {
         id: $("#id").val(),
         name: $("#name").val()
       }),function(data){
