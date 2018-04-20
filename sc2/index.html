@@ -21,13 +21,13 @@
         var replaceKey = replaceKeys[i];
         var replaceKeyWithPoint = ":"+replaceKey;
         if (matchApi.indexOf(replaceKeyWithPoint) > -1) {
-          matchApi.replace(replaceKeyWithPoint,args[replaceKey]);
+          matchApi = matchApi.replace(replaceKeyWithPoint,args[replaceKey]);
         }
       }
       return matchApi;
     }
     $("#submit").click(function(){
-      $.get("/action/" + buildApi(matchApi, {
+      $.get("/action" + buildApi(matchApi, {
         id: $("#id").val(),
         name: $("#name").val()
       }),function(data){
