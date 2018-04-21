@@ -10,7 +10,7 @@ passport.use(new BnetStrategy({
   clientSecret: BNET_SECRET,
   region: "cn",
   scope: "sc2.profile",
-  callbackURL: "https://sc2.galaxycluster.club/#/profile",
+  callbackURL: "https://sc2.galaxycluster.club/bnet/success",
 }, function(accessToken, refreshToken, profile, done) {
   return done(null, profile);
 }));
@@ -19,6 +19,11 @@ var app = express();
 
 app.get('/login',
   passport.authenticate('bnet'));
+
+app.get('/success',function(req, res){
+  console.log(req,res);
+  res.redirect('/#/profile');
+});
 
 var server = app.listen(9002, function() {
   console.log('Listening on port %d', server.address().port);
