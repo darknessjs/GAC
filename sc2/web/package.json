@@ -2,7 +2,9 @@
   "name": "react-typescript",
   "version": "0.1.0",
   "private": true,
+  "homepage": ".",
   "dependencies": {
+    "antd": "^3.4.1",
     "autoprefixer": "7.1.6",
     "babel-jest": "^22.1.0",
     "babel-loader": "^7.1.2",
