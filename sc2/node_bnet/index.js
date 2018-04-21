@@ -10,7 +10,7 @@ passport.use(new BnetStrategy({
   clientSecret: BNET_SECRET,
   region: "cn",
   scope: "sc2.profile",
-  callbackURL: "https://sc2.galaxycluster.club/profile.html",
+  callbackURL: "https://sc2.galaxycluster.club/#/profile",
 }, function(accessToken, refreshToken, profile, done) {
   return done(null, profile);
 }));
