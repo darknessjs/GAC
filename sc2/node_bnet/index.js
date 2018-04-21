@@ -7,8 +7,8 @@ var BNET_ID = 'dtwpk6g4rjjjqcypnjdtms69x5jjpmm4';
 var BNET_SECRET = 'QFkkRBDtchj3ZTsNAKAbZJbT5nM5gyBy';
 var fs = require('fs');
 
-var privateKey = fs.readFileSync('ssl/key.pem', 'utf8');
-var certificate = fs.readFileSync('ssl/key.crt', 'utf8');
+var privateKey = fs.readFileSync('./ssl/key.pem', 'utf8');
+var certificate = fs.readFileSync('./ssl/key.crt', 'utf8');
 var credentials = {
   key: privateKey,
   cert: certificate
