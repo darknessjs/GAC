@@ -17,10 +17,8 @@ passport.use(new BnetStrategy({
 
 var app = express();
 
-app.get('/login',function(){
-  console.log(".login start")
-  passport.authenticate('bnet');
-});
+app.get('/login',
+  passport.authenticate('bnet'));
 
 app.get('/success',function(req, res){
   console.log(req,res);
