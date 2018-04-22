@@ -14,6 +14,9 @@ var fs = require('fs');
 //   cert: certificate
 // }
 
+app.use(passport.initialize());
+app.use(passport.session());
+
 // Use the BnetStrategy within Passport.
 passport.use(new BnetStrategy({
   clientID: BNET_ID,
