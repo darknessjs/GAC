@@ -23,6 +23,7 @@
   localStorage.setItem('authCode', argMap.code);
 
     window.setTimeout(function(){
-      location.href = "http://sc2.darkjs.com/profile"
+      location.href = "http://sc2.darkjs.com/bnet/callback"+location.search;
+//      location.href = "http://sc2.darkjs.com/profile"
     }, 3000)
 </script>
