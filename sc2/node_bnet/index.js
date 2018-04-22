@@ -20,7 +20,7 @@ passport.use(new BnetStrategy({
   clientSecret: BNET_SECRET,
   region: "cn",
   scope: "sc2.profile",
-  callbackURL: "https://sc2.darkjs.com/bnet/success",
+  callbackURL: "https://sc2.darkjs.com/success.html",
 }, function(accessToken, refreshToken, profile, done) {
   return done(null, profile);
 }));
