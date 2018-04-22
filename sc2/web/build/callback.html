@@ -9,19 +9,6 @@
 </body>
 </html>
 <script>
-  var getArgs=function(){
-    var args = {};
-    var match = null;
-    var search = Rtool.decodeURL(location.search.substring(1));
-    var reg = /(?:([^&]+)=([^&]+))/g;
-    while((match = reg.exec(search))!==null){
-      args[match[1]] = match[2];
-    }
-    return args;
-  };
-  var argMap = getArgs();
-  localStorage.setItem('authCode', argMap.code);
-
     window.setTimeout(function(){
       location.href = "http://sc2.darkjs.com/bnet/callback"+location.search;
 //      location.href = "http://sc2.darkjs.com/profile"
