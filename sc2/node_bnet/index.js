@@ -31,8 +31,6 @@ var app = express();
 app.get('/login',
   passport.authenticate('bnet'));
 
-app.get('/callback', passport)
-
 var httpServer = http.createServer(app);
 // var httpsServer = https.createServer(credentials, app);
 
