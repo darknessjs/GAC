@@ -22,6 +22,7 @@ passport.use(new BnetStrategy({
   scope: "sc2.profile",
   callbackURL: "https://sc2.darkjs.com/success.html",
 }, function(accessToken, refreshToken, profile, done) {
+  console.log(accessToken, refreshToken, profile)
   return done(null, profile);
 }));
 
@@ -30,10 +31,6 @@ var app = express();
 app.get('/login',
   passport.authenticate('bnet'));
 
-app.get('/success',function(req, res){
-  console.log(req,res);
-  res.redirect('/#/profile');
-});
 var httpServer = http.createServer(app);
 // var httpsServer = https.createServer(credentials, app);
 
