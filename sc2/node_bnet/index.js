@@ -14,6 +14,7 @@ var fs = require('fs');
 //   cert: certificate
 // }
 
+var app = express();
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -29,7 +30,6 @@ passport.use(new BnetStrategy({
   return done(null, profile);
 }));
 
-var app = express();
 
 app.get('/login',
   passport.authenticate('bnet'));
