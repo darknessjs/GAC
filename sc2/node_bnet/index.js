@@ -17,6 +17,10 @@ var fs = require('fs');
 var app = express();
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(cookieParser());
+app.use(session({ secret: 'blizzard',
+  saveUninitialized: true,
+  resave: true }));
 
 // Use the BnetStrategy within Passport.
 passport.use(new BnetStrategy({
