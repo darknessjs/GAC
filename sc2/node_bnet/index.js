@@ -24,6 +24,15 @@ app.use(session({ secret: 'blizzard',
   saveUninitialized: true,
   resave: true }));
 
+
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+  done(null, user);
+});
+
 // Use the BnetStrategy within Passport.
 passport.use(new BnetStrategy({
   clientID: BNET_ID,
