@@ -30,7 +30,7 @@ passport.use(new BnetStrategy({
   clientSecret: BNET_SECRET,
   region: "cn",
   scope: "sc2.profile",
-  callbackURL: "https://sc2.darkjs.com/callback.html",
+  callbackURL: "https://sc2.darkjs.com/bnet/callback",
 }, function(accessToken, refreshToken, profile, done) {
   console.log(accessToken, refreshToken, profile)
   return done(null, profile);
@@ -43,6 +43,7 @@ app.get('/login',
 app.get('/callback',
   passport.authenticate('bnet', { failureRedirect: '/' }),
   function(req, res){
+    console.log(res,req);
     res.redirect('/');
   });
 
