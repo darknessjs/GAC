@@ -113,7 +113,9 @@ func sendGetRes(api string, w http.ResponseWriter) {
 	} else {
 		fmt.Println("抛出异常")
 		w.WriteHeader(response.StatusCode);
-		fmt.Fprintf(w, "2333");
+		body, _ := ioutil.ReadAll(response.Body)
+		bodystr := string(body);
+		fmt.Fprintf(w, bodystr);
 		//fmt.Fprintf(w, "error") //这个写入到w的是输出到客户端的
 	}
 }

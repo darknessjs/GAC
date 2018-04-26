@@ -4,6 +4,9 @@
   "private": true,
   "homepage": ".",
   "dependencies": {
+    "@types/history": "^4.6.2",
+    "@types/jquery": "^3.3.1",
+    "@types/prop-types": "^15.5.2",
     "@types/react-router-dom": "^4.2.6",
     "antd": "^3.4.1",
     "autoprefixer": "7.1.6",
@@ -22,10 +25,12 @@
     "history": "^4.7.2",
     "html-webpack-plugin": "2.29.0",
     "jest": "22.1.4",
+    "jquery": "^3.3.1",
     "object-assign": "4.1.1",
     "postcss-flexbugs-fixes": "3.2.0",
     "postcss-loader": "2.0.8",
     "promise": "8.0.1",
+    "prop-types": "^15.6.1",
     "raf": "3.4.0",
     "react": "^16.3.2",
     "react-dev-utils": "^5.0.1",
@@ -59,7 +64,7 @@
     "@types/node": "^9.6.6",
     "@types/react": "^16.3.12",
     "@types/react-dom": "^16.0.5",
-    "@types/react-router": "^4.0.23",
+    "@types/react-router": "^4.0.24",
     "@types/react-router-redux": "4.0.48",
     "react-router-redux": "4.0.8",
     "typescript": "^2.8.3"
@@ -115,5 +120,12 @@
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "proxy": {
+    "/action": {
+      "target": "http://localhost:9001",
+      "pathRewrite": {"/action" : "/"},
+      "secure": false
+    }
   }
 }

@@ -1,4 +1,4 @@
-import createHistory from 'history/createHashHistory'
+import { default as createHashHistory } from "history/createHashHistory";
 import * as React from 'react';
 import { Route, Router, Switch } from 'react-router-dom';
 
@@ -7,7 +7,7 @@ import Result from 'script/views/result';
 
 import 'style/App.css';
 
-const history = createHistory();
+const history = createHashHistory();
 
 
 class App extends React.Component {
@@ -16,7 +16,7 @@ class App extends React.Component {
         <Router history={history}>
             <Switch>
                 <Route exact={true} path="/" component={Result}/>
-                <Route path="/profile" component={Profile}/>
+                <Route path="/profile/:name/:sc2Id" component={Profile}/>
             </Switch>
         </Router>
     );
