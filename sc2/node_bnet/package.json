@@ -16,6 +16,7 @@
     "http": "0.0.0",
     "https": "^1.0.0",
     "passport": "^0.4.0",
-    "passport-bnet": "^1.2.1"
+    "passport-bnet": "^1.2.1",
+    "request": "^2.85.0"
   }
 }

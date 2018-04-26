@@ -7,6 +7,7 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var BNET_ID = 'dtwpk6g4rjjjqcypnjdtms69x5jjpmm4';
 var BNET_SECRET = 'QFkkRBDtchj3ZTsNAKAbZJbT5nM5gyBy';
+var request = require('request');
 var fs = require('fs');
 
 // var privateKey = fs.readFileSync('./ssl/key.pem', 'utf8');
@@ -41,7 +42,11 @@ passport.use(new BnetStrategy({
   scope: "sc2.profile",
   callbackURL: "https://sc2.darkjs.com/bnet/callback",
 }, function(accessToken, refreshToken, profile, done) {
-  console.log(accessToken, refreshToken, profile)
+  console.log(accessToken, refreshToken, profile);
+  if (accessToken != null) {
+    request('http://localhost:9001/saveAccessToken?accessToken='+accessToken, function (error, response, body) {
+    })
+  }
   return done(null, profile);
 }));
 
@@ -52,7 +57,7 @@ app.get('/login',
 app.get('/callback',
   passport.authenticate('bnet', { failureRedirect: '/' }),
   function(req, res){
-    console.log(res,req);
+    console.log(req);
     res.redirect('/');
   });
 
