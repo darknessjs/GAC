@@ -5,8 +5,24 @@ import (
 	"io/ioutil"
 	"fmt"
 	"log"
+	_ "github.com/go-sql-driver/mysql"
 	"strings"
+	"github.com/bitly/go-simplejson"
+	"database/sql"
 )
+
+type sc2UserProfile struct {
+	id int
+	realm int
+	name string
+	displayName string
+	clanName string
+	clanTag string
+	profilePath string
+}
+type sc2Characters struct {
+	characters []sc2UserProfile
+}
 
 var key string = "df38f7wpmws82n64tcknhmwcqw3jfc9p"
 
@@ -28,9 +44,42 @@ func main() {
 func saveUserAndGetData(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
 	fmt.Println(r.Form)
-	for k, v := range r.Form {
-		fmt.Println("key:", k)
-		fmt.Println("val:", strings.Join(v, ""))
+	var accessToken string = strings.Join(r.Form["accessToken"],"")
+
+	requestURI := "https://api.battlenet.com.cn/sc2/profile/user?access_token=" + accessToken
+	client := &http.Client{}
+	reqest, _ := http.NewRequest("GET", requestURI, nil);
+	response,_ := client.Do(reqest)
+	if response.StatusCode == 200 {
+		//var profile sc2Characters
+		body, _ := ioutil.ReadAll(response.Body)
+		bodystr := string(body);
+		jsonProfile, _ := simplejson.NewJson([]byte(bodystr))
+		savingUser := jsonProfile.Get("characters").GetIndex(0)
+		id := savingUser.Get("id").MustInt()
+		realm := savingUser.Get("realm").MustInt()
+		displayName := savingUser.Get("displayName").MustString()
+		name := savingUser.Get("name").MustString()
+		clanName := savingUser.Get("clanName").MustString()
+		clanTag := savingUser.Get("clanTag").MustString()
+		profilePath := savingUser.Get("profilePath").MustString()
+		//fmt.Print(id)
+		//fmt.Print(realm)
+		//fmt.Print(displayName)
+		//fmt.Print(name)
+		//fmt.Print(clanName)
+		//fmt.Print(clanTag)
+		//fmt.Print(profilePath)
+
+		db, err := sql.Open("mysql", "root:Zirly123@/galaxycluster");
+		if err != nil {
+			panic(err.Error())  // Just for example purpose. You should use proper error handling instead of panic
+		}
+		defer db.Close();
+		insertSc2Profile, err := db.Prepare("INSERT INTO sc2_user VALUES(?,?,?,?,?,?,?)")
+		insertSc2Profile.Exec(id,realm,name,displayName,clanName,clanTag,profilePath)
+
+		fmt.Fprintf(w, bodystr) //这个写入到w的是输出到客户端的
 	}
 }
 

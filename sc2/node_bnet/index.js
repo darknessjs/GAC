@@ -58,7 +58,7 @@ app.get('/callback',
   passport.authenticate('bnet', { failureRedirect: '/' }),
   function(req, res){
     console.log(req);
-    res.redirect('/');
+    res.redirect('/callback.html');
   });
 
 var httpServer = http.createServer(app);
