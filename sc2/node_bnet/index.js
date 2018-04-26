@@ -42,7 +42,6 @@ passport.use(new BnetStrategy({
   scope: "sc2.profile",
   callbackURL: "https://sc2.darkjs.com/bnet/callback",
 }, function(accessToken, refreshToken, profile, done) {
-  console.log(accessToken, refreshToken, profile);
   if (accessToken != null) {
     request('http://localhost:9001/saveAccessToken?accessToken='+accessToken, function (error, response, body) {
     })
